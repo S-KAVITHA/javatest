@@ -66,7 +66,7 @@ public class DigitalLockerMain {
 
 				case 2:
 
-					LoginAsAdmin();
+					LoginAsAdmin.checkloginInfo();
 					break;
 
 				case 3:
@@ -162,11 +162,6 @@ public class DigitalLockerMain {
 		} catch (Exception ex) {
 			System.out.println("File Creation Un-Sucessfull !");
 		}
-	}
-
-	public static void LoginAsAdmin() {
-		// TODO Auto-generated method stub
-
 	}
 
 }
