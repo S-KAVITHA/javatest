@@ -33,10 +33,10 @@ public class DigitalLocker {
 		System.out.println("---------------------------------------------------------------");
 
 		System.out.println("\nYou can use this application to ,  ");
-		System.out.println("\n1 -> Create files for each user with login credentials. ");
-		System.out.println("2 -> Retrieving the file names in an ascending order. ");
-		System.out.println("3 -> Perform File operations such as add, delete , search. ");
-		System.out.println("4 -> Exit the application");
+		System.out.println("\n1 -> Registration. ");
+		System.out.println("2 -> Login ");
+		//System.out.println("3 -> Perform File operations such as add, delete , search. ");
+		System.out.println("3 -> Exit the application");
 
 	}
 
@@ -47,7 +47,7 @@ public class DigitalLocker {
 
 			try {
 
-				System.out.println("\nEnter choice [1-4]: ");
+				System.out.println("\nEnter choice [1-3]: ");
 				Scanner input1 = new Scanner(System.in);
 				int choice = input1.nextInt();
 
