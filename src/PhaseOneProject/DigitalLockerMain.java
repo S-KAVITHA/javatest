@@ -39,7 +39,7 @@ public class DigitalLockerMain {
 		// step 1. collect input from user console
 		String userName = "Kavitha S";
 		System.out.println("::********************************************::");
-		System.out.println("\n       Welcome to LockMe.com ");
+		System.out.println("         Welcome to LockMe.com ");
 		System.out.println("\n::********************************************::");
 		System.out.println("         Your Personal Digital Locker   ");
 		System.out.println("            Developed by " + userName);
@@ -131,16 +131,13 @@ public class DigitalLockerMain {
 		
 		
 		System.out.println("==========================================");
-		System.out.println("*					*");
-		System.out.println("*   WELCOME TO LOGIN PAGE	 *");
-		System.out.println("*					*");
+		System.out.println("*     Welcome to Login Page	      *");
 		System.out.println("==========================================");
 		System.out.println("Enter Username :");
 		String inpUsername = myobj.next();
 		System.out.println("Enter Password :");
 		String inpPassword = myobj.next();
-		System.out.println("****Reading File****");
-
+		
 	     // Lastly reading File
 	     UserCollection.readFile(inpUsername,inpPassword);
 

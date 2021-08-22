@@ -53,12 +53,12 @@ class UserCredentials  implements Serializable {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
+
+	/*public String toString() {
 		return "UserCredentials [siteName=" + siteName + 
 				", loggedInUser=" + loggedInUser + 
 				", username=" + username
-				+ ", password=" + password + "]";
+				+ ", password=" + password + "]"; } */
 	}
 	
 	
@@ -67,5 +67,3 @@ class UserCredentials  implements Serializable {
 	
 	
 	
-
-}

@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class lockerOperations {
@@ -19,9 +22,12 @@ public class lockerOperations {
 
 		pathDirect = System.getProperty("user.dir") + fileSep + inpUsername;
 
-		System.out.println("1 . FETCH ALL STORED CREDENTIALS ");
-		System.out.println("2 . STORED CREDENTIALS ");
-		System.out.println("2 . Delete CREDENTIALS ");
+		System.out.println("1 -> Store User Credentials ");
+		System.out.println("2 -> List User Files ");
+		System.out.println("4 -> Show User Credentials");
+		System.out.println("5 -> Delete User Files ");
+		System.out.println("5 -> Return to Previous Menu");
+		System.out.println("6 -> Exit the application");
 
 		do {
 			System.out.println("\nEnter choice [1-4]: ");
@@ -30,26 +36,64 @@ public class lockerOperations {
 			switch (getchoice) {
 			case 1:
 
-				fetchCredentials();
-				break;
-
-			case 2:
 				storeCredentials(inpUsername);
 				break;
 
+			case 2:
+				listallfilenames(inpUsername);
+
+			case 3:
+
+				fetchCredentials();
+				break;
+
 			case 4:
+
+				deleteCredentials();
+				break;
+
+			case 5:
 				System.out.println("Return to Main Menu");
 				return;
 
-			case 5:
+			case 6:
 				System.out.println("Exit the application");
 				loopagain1 = false;
 				// input.close();
 				System.exit(0);
 				break;
+			default:
+				System.out.println("Please enter a valid input");
+				break;
 
 			}
 		} while (loopagain1);
+	}
+
+	private static void listallfilenames(String listUsername) {
+	
+		String listfilenames = pathDirect + fileSep ;
+			
+		File fileDirList = new File(listfilenames);
+				
+		File[] listOffiles = fileDirList.listFiles();
+		List<String> listFile = new ArrayList<String>();
+		
+		
+		for (File gettfile : listOffiles) {
+			if ((gettfile.isDirectory() == false) && (gettfile.getAbsolutePath().endsWith(".txt"))) {
+				listFile.add(gettfile.getAbsolutePath());
+				
+			}
+		}
+		
+		System.out.println("----------------------------------------");
+		System.out.println("::Sorting filenames in ascending order::");
+		System.out.println("----------------------------------------");
+
+		Collections.sort(listFile);
+		listFile.forEach(System.out::println);
+
 	}
 
 	public static void storeCredentials(String loggedInUser) {
@@ -97,8 +141,6 @@ public class lockerOperations {
 			// method to serialize object
 			siteout.writeObject(userCredentials);
 
-			System.out.println("Serialization is completed !");
-
 			siteout.close();
 			sitefile.close();
 
@@ -106,7 +148,7 @@ public class lockerOperations {
 			ex.printStackTrace();
 		}
 
-		System.out.println("YOUR CREDS ARE STORED AND SECURED!");
+		System.out.println("Your Credentials Stored Sucessfully !!!");
 
 	}
 
@@ -114,33 +156,67 @@ public class lockerOperations {
 	public static void fetchCredentials() {
 		System.out.println("==========================================");
 		System.out.println("*					*");
-		System.out.println("*   WELCOME TO DIGITAL LOCKER 	 *");
-		System.out.println("*   YOUR CREDS ARE 	 *");
+		System.out.println("*   Welcome to Digital Locker System *");
+		System.out.println("*      Your Credentials are here 	 *");
 		System.out.println("*					*");
 		System.out.println("==========================================");
 
 		System.out.println("Enter an website user name : ");
-		String getwebuser = keyboard.nextLine();
+		String getwebuser = keyboard.next();
 
 		try {
 			// 1. read a file
 			String fetchfilename = pathDirect + fileSep + getwebuser + ".txt";
 
-			FileInputStream fetchfile = new FileInputStream(fetchfilename);
+			FileInputStream filef = new FileInputStream(fetchfilename);
 
 			// 2. create a input stream object
-			ObjectInputStream fetchin = new ObjectInputStream(fetchfile);
+
+			ObjectInputStream inf = new ObjectInputStream(filef);
 
 			// 3. method to de-serialized object
-			UserCredentials employee = (UserCredentials) fetchin.readObject();
+			UserCredentials listOfCreds = (UserCredentials) inf.readObject();
 
-			System.out.println(" De serialization completed !");
-			System.out.println("Emp Id : " + employee.getSiteName());
-			System.out.println("Emp Name : " + employee.getUsername());
-			System.out.println("Emp Dept : " + employee.getPassword());
+			// while (fetchis.available() != 0) {
+
+			// }
+			// 3. method to de-serialized object
+			// UserCredentials employee = (UserCredentials) fetchin.readObject();
+
+			System.out.println("Website User Credentials !");
+			System.out.println("****************************");
+			System.out.println("Website Name : " + listOfCreds.getSiteName());
+			System.out.println("User Name    : " + listOfCreds.getUsername());
+			System.out.println("Password     : " + listOfCreds.getPassword());
+
+			inf.close();
+			filef.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+
+	}
+
+	public static void deleteCredentials() {
+		System.out.println("==========================================");
+		System.out.println("*					*");
+		System.out.println("*   Welcome to Digital Locker System	 *");
+		System.out.println("*      Remove Your Credentials 	 *");
+		System.out.println("*					*");
+		System.out.println("==========================================");
+
+		System.out.println("Enter an website user name to remove: ");
+		String delwebuser = keyboard.next();
+
+		// 1. read a file
+		String delfilename = pathDirect + fileSep + delwebuser + ".txt";
+		File delfile = new File(delfilename);
+        
+		if (delfile.delete()) {
+			System.out.println("File deleted successfully");
+		} else {
+			System.out.println("Failed to delete the file");
 		}
 
 	}

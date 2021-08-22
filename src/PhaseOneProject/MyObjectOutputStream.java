@@ -88,7 +88,7 @@ class UserCollection {
 					if (userId.equals(inpUsername) && userpassword.equals(inpPassword)) {
 
 						System.out.println("Login Successful ! 200OK");
-						System.out.println(inpUsername);
+						
 						// found = true;
 						lockerOperations.dolockerOperations(inpUsername);
 						// break;
