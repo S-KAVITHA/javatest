@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+
+import serialization.Employee;
+
 import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
@@ -108,8 +113,11 @@ public class DigitalLockerMain {
 		System.out.println("Enter an role : ");
 		String role = myobj.nextLine();
 
-		UserCredential userdetails = new UserCredential(userName, password, emailID, role);
+		//Users userdetails = new Users(userName, password, emailID, role);
+		Users userdetails = new Users("w","w","w","w");
 
+		
+		 
 		File createFolder = new File("main");
 
 		// If file doesn't exist, create the main folder
@@ -122,8 +130,11 @@ public class DigitalLockerMain {
 
 	}
 
-	private static void writeAdminfile(UserCredential userdetails) {
+	@SuppressWarnings("resource")
+	private static void writeAdminfile(Users userdetails) {
 
+		ArrayList<Users> woi =new ArrayList<>();
+		
 		try {
 			String pathDir = System.getProperty("user.dir") + fileSeparator1 + "main";
 			String fileNamePath = pathDir + fileSeparator1 + "adminlogin" + ".txt";
@@ -138,8 +149,8 @@ public class DigitalLockerMain {
 			if (append) {
 				FileOutputStream file = new FileOutputStream(fileNamePath, append);
 				ObjectOutputStream out = new ObjectOutputStream(file);
-
-				out.writeObject(userdetails);
+				woi.add(userdetails);
+				out.writeObject(woi);
 					
 				out.close();
 				file.close();
@@ -150,15 +161,41 @@ public class DigitalLockerMain {
 				FileOutputStream file = new FileOutputStream(fileNamePath);
 			
 			ObjectOutputStream out = new ObjectOutputStream(file);
-
-			out.writeObject(userdetails);
+			woi.add(userdetails);
+			out.writeObject(woi);
 				
 			out.close();
 			file.close();
 			System.out.println("File Creation Sucessfull !!!");
+				
+					
 			}
 			
-
+			FileInputStream file = new FileInputStream(fileNamePath);
+			
+			// 2. create a input strem object
+			@SuppressWarnings("resource")
+			ObjectInputStream in = new ObjectInputStream(file);
+				
+			Object obj = in.readObject();
+			System.out.println(obj);
+			
+			@SuppressWarnings("unchecked")
+			ArrayList<Employee> computers = (ArrayList<Employee>) obj;
+        
+			
+            //System.out.println(computers);
+            
+            for (Employee employee : computers) {
+            	 System.out.println("--------------------------");
+                System.out.println(employee.toString());
+                System.out.println("------------------------------");
+    
+				  System.out.println(" De serialization completed !");
+				  
+            }
+			
+			
 		} catch (Exception ex) {
 			System.out.println("File Creation Un-Sucessfull !");
 		}

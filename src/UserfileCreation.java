@@ -40,7 +40,7 @@ public class UserfileCreation {
 		System.out.println("Enter an role : ");
 		String role = myobj.nextLine();
 
-		UserCredential userdetails = new UserCredential(userName, password, emailID, role);
+		Users userdetails = new Users(userName, password, emailID, role);
 
 		try {
 
