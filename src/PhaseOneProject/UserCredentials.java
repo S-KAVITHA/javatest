@@ -2,17 +2,17 @@ package PhaseOneProject;
 
 import java.io.Serializable;
 
-class UserCredentials  implements Serializable {
-	
+class UserCredentials implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private String siteName;
 	private String loggedInUser;
 	private String username;
 	private String password;
-	
-	public UserCredentials() {}
+
+	public UserCredentials() {
+	}
 
 	public UserCredentials(String siteName, String loggedInUser, String username, String password) {
 		this.siteName = siteName;
@@ -53,17 +53,4 @@ class UserCredentials  implements Serializable {
 		this.password = password;
 	}
 
-
-	/*public String toString() {
-		return "UserCredentials [siteName=" + siteName + 
-				", loggedInUser=" + loggedInUser + 
-				", username=" + username
-				+ ", password=" + password + "]"; } */
-	}
-	
-	
-	
-	
-	
-	
-	
+}
